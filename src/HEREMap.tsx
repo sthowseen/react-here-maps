@@ -25,20 +25,22 @@ export interface HEREMapState {
   map?: H.Map;
   behavior?: H.mapevents.Behavior;
   ui?: H.ui.UI;
+  platform?: H.service.Platform;
 }
 
 // declare an interface containing the context to be passed through the heirarchy
 export interface HEREMapChildContext {
   map: H.Map;
+  platform: H.service.Platform;
 }
 
 // export the HEREMap React Component from this module
 @HMapMethods
-export class HEREMap
-  extends React.Component<HEREMapProps, HEREMapState>
+export class HEREMap extends React.Component<HEREMapProps, HEREMapState>
   implements React.ChildContextProvider<HEREMapChildContext> {
   public static childContextTypes = {
     map: React.PropTypes.object,
+    platform: React.PropTypes.object
   };
 
   // add typedefs for the HMapMethods mixin
@@ -63,8 +65,8 @@ export class HEREMap
   }
 
   public getChildContext() {
-    const {map} = this.state;
-    return {map};
+    const { map, platform } = this.state;
+    return { map, platform };
   }
 
   public componentDidMount() {
@@ -76,18 +78,19 @@ export class HEREMap
         hidpi,
         interactive,
         secure,
-        zoom,
+        zoom
       } = this.props;
 
       // get the platform to base the maps on
       const platform = getPlatform({
         app_code: appCode,
         app_id: appId,
-        useHTTPS: secure === true,
+        useHTTPS: secure === true
       });
+      this.setState({ platform });
 
       const defaultLayers = platform.createDefaultLayers({
-        ppi: hidpi ? 320 : 72,
+        ppi: hidpi ? 320 : 72
       });
 
       const hereMapEl = ReactDOM.findDOMNode(this);
@@ -98,22 +101,24 @@ export class HEREMap
         {
           center,
           pixelRatio: hidpi ? 2 : 1,
-          zoom,
-        },
+          zoom
+        }
       );
 
       if (interactive !== false) {
         // make the map interactive
         // MapEvents enables the event system
         // Behavior implements default interactions for pan/zoom
-        const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+        const behavior = new H.mapevents.Behavior(
+          new H.mapevents.MapEvents(map)
+        );
 
         // create the default UI for the map
         const ui = H.ui.UI.createDefault(map, defaultLayers);
 
         this.setState({
           behavior,
-          ui,
+          ui
         });
       }
 
@@ -126,12 +131,12 @@ export class HEREMap
   }
 
   public componentWillMount() {
-    const {
-      secure,
-    } = this.props;
+    const { secure } = this.props;
 
     cache(getScriptMap(secure === true));
-    const stylesheetUrl = `${secure === true ? "https:" : ""}//js.api.here.com/v3/3.0/mapsjs-ui.css`;
+    const stylesheetUrl = `${secure === true
+      ? "https:"
+      : ""}//js.api.here.com/v3/3.0/mapsjs-ui.css`;
     getLink(stylesheetUrl, "HERE Maps UI");
   }
 
@@ -148,7 +153,7 @@ export class HEREMap
         <div
           className="map-container"
           id={`map-container-${uniqueId()}`}
-          style={{height: "100%"}}
+          style={{ height: "100%" }}
         >
           {children}
         </div>
@@ -157,9 +162,7 @@ export class HEREMap
   }
 
   private resizeMap() {
-    const {
-      map,
-    } = this.state;
+    const { map } = this.state;
 
     if (map) {
       map.getViewPort().resize();
