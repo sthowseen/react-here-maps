@@ -32,6 +32,8 @@ export interface HEREMapState {
 export interface HEREMapChildContext {
   map: H.Map;
   platform: H.service.Platform;
+  ui: H.ui.UI;
+  behavior: H.mapevents.Behavior;
 }
 
 // export the HEREMap React Component from this module
@@ -65,8 +67,8 @@ export class HEREMap extends React.Component<HEREMapProps, HEREMapState>
   }
 
   public getChildContext() {
-    const { map, platform } = this.state;
-    return { map, platform };
+    const { map, platform, behavior, ui } = this.state;
+    return { map, platform, behavior, ui };
   }
 
   public componentDidMount() {
