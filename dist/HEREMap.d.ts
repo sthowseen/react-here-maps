@@ -19,11 +19,15 @@ export interface HEREMapState {
 export interface HEREMapChildContext {
     map: H.Map;
     platform: H.service.Platform;
+    ui: H.ui.UI;
+    behavior: H.mapevents.Behavior;
 }
 export declare class HEREMap extends React.Component<HEREMapProps, HEREMapState> implements React.ChildContextProvider<HEREMapChildContext> {
     static childContextTypes: {
         map: React.Requireable<any>;
         platform: React.Requireable<any>;
+        ui: React.Requireable<any>;
+        behavior: React.Requireable<any>;
     };
     getElement: () => Element;
     getMap: () => H.Map;
@@ -35,6 +39,8 @@ export declare class HEREMap extends React.Component<HEREMapProps, HEREMapState>
     getChildContext(): {
         map: H.Map;
         platform: H.service.Platform;
+        behavior: H.mapevents.Behavior;
+        ui: H.ui.UI;
     };
     componentDidMount(): void;
     componentWillMount(): void;

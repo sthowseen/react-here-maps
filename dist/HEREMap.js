@@ -38,8 +38,8 @@ var HEREMap = /** @class */ (function (_super) {
         return _this;
     }
     HEREMap.prototype.getChildContext = function () {
-        var _a = this.state, map = _a.map, platform = _a.platform;
-        return { map: map, platform: platform };
+        var _a = this.state, map = _a.map, platform = _a.platform, behavior = _a.behavior, ui = _a.ui;
+        return { map: map, platform: platform, behavior: behavior, ui: ui };
     };
     HEREMap.prototype.componentDidMount = function () {
         var _this = this;
@@ -104,7 +104,9 @@ var HEREMap = /** @class */ (function (_super) {
     };
     HEREMap.childContextTypes = {
         map: React.PropTypes.object,
-        platform: React.PropTypes.object
+        platform: React.PropTypes.object,
+        ui: React.PropTypes.object,
+        behavior: React.PropTypes.object
     };
     HEREMap = __decorate([
         h_map_methods_1["default"]
