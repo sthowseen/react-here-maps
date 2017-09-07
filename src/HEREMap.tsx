@@ -42,7 +42,9 @@ export class HEREMap extends React.Component<HEREMapProps, HEREMapState>
   implements React.ChildContextProvider<HEREMapChildContext> {
   public static childContextTypes = {
     map: React.PropTypes.object,
-    platform: React.PropTypes.object
+    platform: React.PropTypes.object,
+    ui: React.PropTypes.object,
+    behavior: React.PropTypes.object
   };
 
   // add typedefs for the HMapMethods mixin
