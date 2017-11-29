@@ -17,31 +17,31 @@ export function getScriptMap(secure?: boolean): ScriptMap {
   }
 
   // the base url for all scripts from the API
-  const baseUrl: string = `${protocol}//js.api.here.com/` +
-    `${apiVersion}/${codeVersion}`;
+  const baseUrl: string =
+    `${protocol}//js.api.here.com/` + `${apiVersion}/${codeVersion}`;
 
   // core code
-  const coreScript: string =
-    `${baseUrl}/mapsjs-core.js`;
+  const coreScript: string = `${baseUrl}/mapsjs-core.js`;
 
   // service code
-  const serviceScript: string =
-    `${baseUrl}/mapsjs-service.js`;
+  const serviceScript: string = `${baseUrl}/mapsjs-service.js`;
 
   // default ui code
-  const uiScript: string =
-    `${baseUrl}/mapsjs-ui.js`;
+  const uiScript: string = `${baseUrl}/mapsjs-ui.js`;
 
   // map events (pan, scroll wheel zoom) code
-  const mapEventsScript: string =
-    `${baseUrl}/mapsjs-mapevents.js`;
+  const mapEventsScript: string = `${baseUrl}/mapsjs-mapevents.js`;
+
+  // Clustering
+  const mapClusteringScript: string = `${baseUrl}/mapsjs-clustering.js`;
 
   // return an array with all script names within
   return {
     coreScript,
     mapEventsScript,
     serviceScript,
-    uiScript,
+    mapClusteringScript,
+    uiScript
   };
 }
 
