@@ -10,8 +10,7 @@ function getScriptMap(secure) {
         protocol = "https:";
     }
     // the base url for all scripts from the API
-    var baseUrl = protocol + "//js.api.here.com/" +
-        (apiVersion + "/" + codeVersion);
+    var baseUrl = protocol + "//js.api.here.com/" + (apiVersion + "/" + codeVersion);
     // core code
     var coreScript = baseUrl + "/mapsjs-core.js";
     // service code
@@ -20,11 +19,14 @@ function getScriptMap(secure) {
     var uiScript = baseUrl + "/mapsjs-ui.js";
     // map events (pan, scroll wheel zoom) code
     var mapEventsScript = baseUrl + "/mapsjs-mapevents.js";
+    // Clustering
+    var mapClusteringScript = baseUrl + "/mapsjs-clustering.js";
     // return an array with all script names within
     return {
         coreScript: coreScript,
         mapEventsScript: mapEventsScript,
         serviceScript: serviceScript,
+        mapClusteringScript: mapClusteringScript,
         uiScript: uiScript
     };
 }
